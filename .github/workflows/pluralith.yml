@@ -22,13 +22,13 @@ jobs:
       # Init Terraform project
       - name: Terraform Init
         run: terraform init 
-        working-directory: $"{{ env.working-directory }}/application"
+        working-directory: $"{{ env.working-directory }}/**"
 
       # Set up and initialize Pluralith
       - name: Pluralith Init
         uses: Pluralith/actions/init@v1.4.0
         with:
-          terraform-path: "${{ env.working-directory }}/application"
+          terraform-path: "${{ env.working-directory }}/**"
           api-key: ${{ secrets.PLURALITH_API_KEY }}
 
       # Run Pluralith to generate an infrastructure diagram
@@ -36,7 +36,7 @@ jobs:
         uses: Pluralith/actions/run@v1.4.0
         with:
           terraform-command: "plan"
-          terraform-path: "${{ env.working-directory }}/application"
+          terraform-path: "${{ env.working-directory }}/**"
           show-changes: true
           show-drift: true
           show-costs: true
@@ -45,4 +45,4 @@ jobs:
       - name: Pluralith Comment
         uses: Pluralith/actions/comment@v1.4.0
         with:
-          terraform-path: "${{ env.working-directory }}/application"
+          terraform-path: "${{ env.working-directory }}/**"
