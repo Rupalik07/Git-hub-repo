@@ -1,4 +1,6 @@
 name: Pluralith Workflow
+env:
+  working-directory: "./"
 
 on:
   push:
@@ -19,7 +21,8 @@ jobs:
           terraform_wrapper: false
       # Init Terraform project
       - name: Terraform Init
-        run: terraform init working-directory:
+        run: terraform init 
+        working-directory: $"{{ env.working-directory }}/application"
 
       # Set up and initialize Pluralith
       - name: Pluralith Init
