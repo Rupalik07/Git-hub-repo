@@ -22,7 +22,7 @@ jobs:
       # Init Terraform project
       - name: Terraform Init
         run: terraform init 
-        working-directory: $"{{ env.working-directory }}/**"
+        working-directory: "${{ env.working-directory }}/**"
 
       # Set up and initialize Pluralith
       - name: Pluralith Init
